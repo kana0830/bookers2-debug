@@ -1,21 +1,20 @@
 <h2>User info</h2>
+	<!-- エラーメッセージ表示-->
+	<% if @user.errors.any? %>
+		<h3><%= @user.errors.count %>error occurrence</h3><!--エラーメッセ-->
+		<ul>
+			<% @user.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<!-- エラーメッセージ表示-->
 
 <%= form_for(@user) do |f| %>
 
-<!-- エラーメッセージ表示-->
-<% if @user.errors.any? %>
-	<h3><%= @user.errors.count %>error occurrence</h3><!--エラーメッセ-->
-	<ul>
-		<% @user.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
-<% end %>
-<!-- エラーメッセージ表示-->
-
 <div class="field">
-	<%= f.label :title %>
-	<%= f.text_field :title, class: "name" %>
+	<%= f.label :name %>
+	<%= f.text_field :name, class: "name" %>
 </div>
 
 <div class="field">
@@ -29,7 +28,7 @@
 </div>
 
 <div class="actions">
-	<%= f.submit %>
+	<%= f.submit "Update User", method: :post, class: "btn btn-primary col-3" %>
 </div>
 
 <% end %>
