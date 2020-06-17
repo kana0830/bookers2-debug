@@ -52,7 +52,9 @@
 				</tr>
 				<tr>
 					<%= book_comment.comment %>
-					<%= link_to "Destroy", book_book_comments_path(book_comment), method: :delete, class: "btn-sm btn-danger" %><br><br>
+					<% if @book.user_id == current_user.id%>
+						<%= link_to "Destroy", book_book_comments_path(book_comment), method: :delete, class: "btn-sm btn-danger" %><br><br>
+					<% end %>
 				</tr>
 			<% end %>
 		</table>
