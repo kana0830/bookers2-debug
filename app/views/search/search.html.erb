@@ -1,5 +1,8 @@
 <h1>Search User</h1>
 
+<%
+=begin
+%>
 <table class="table">
   <thead>
     <tr>
@@ -9,15 +12,64 @@
     </tr>
   </thead>
 
+
   <tbody>
     <% @datas.each do |data| %>
     <tr>
       <td>
-      <%# <%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
-      <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no-image-mini.jpg", size: "50x50" %></td>
-      <td><%= data.name%></td>
+      <%= attachment_image_tag(@user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+      <%# <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no-image-mini.jpg", size: "50x50" %></td>
+      <td><%= @user.name%></td>
       <td><%= link_to "Show", data, class: "user_#{data.id}" %></td>
     </tr>
     <% end %>
   </tbody>
+<%
+=end
+%>
+<table class="table">
+
+  <% if @model == 'book' %>
+    <thead>
+      <tr>
+        <th>image</th>
+        <th>title</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @datas.each do |data| %>
+      <tr>
+        <td>
+        <%= attachment_image_tag(@user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+        <%# <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no-image-mini.jpg", size: "50x50" %></td>
+        <td><%= data.title %></td>
+        <td><%= link_to "Show", data, class: "user_#{data.id}" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  <% elsif @model == 'user' %>
+    <thead>
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @datas.each do |data| %>
+      <tr>
+        <td>
+        <%= attachment_image_tag(@user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+        <%# <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no-image-mini.jpg", size: "50x50" %></td>
+        <td><%= data.name %></td>
+        <td><%= link_to "Show", data, class: "user_#{data.id}" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+
+  <% end %>
+
+
 </table>
