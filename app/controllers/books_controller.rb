@@ -3,9 +3,10 @@ class BooksController < ApplicationController
 
   def show
 		@book = Book.find(params[:id])
-		@user = current_user
+		@user = @book.user
 		@book_new = Book.new
-		@comment = BookComment.new
+		@book_comment = BookComment.new
+		@comments = @book.book_comments
   end
 
   def index
@@ -13,7 +14,7 @@ class BooksController < ApplicationController
 		@book = Book.new
   end
 
-  def create
+	def create
 		@book = Book.new(book_params) #Bookモデルのテーブルを使用しているのでbookコントローラで保存する。
 		@book.user_id = current_user.id
   	if @book.save #入力されたデータをdbに保存する。
