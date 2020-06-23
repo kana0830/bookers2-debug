@@ -5,15 +5,30 @@
 
   <!--name表示の追加-->
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %><br>
     <%= f.text_field :name, autofocus: true, class: "name" %>
   </div>
   <!--name表示の追加-->
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %><br>
     <%= f.email_field :email, autofocus: true, class: "email" %>
   </div>
+
+    <div class="field">
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code, autofocus: true, placeholder: 'postal_code', class: "postal_code", id: "address_zipcode" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :prefecture_code %><br>
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, class: "address" %> <br>
+    <%= f.label :city %><br>
+    <%= f.text_field :city, autofocus: true, placeholder: 'city', class: "address", id:"address_city" %> <br>
+    <%= f.label :street %><br>
+    <%= f.text_field :building, autofocus: true, placeholder: 'street', class: "address", id: "address_street" %>
+  </div>
+
 
   <div class="field">
     <%= f.label :password %>
