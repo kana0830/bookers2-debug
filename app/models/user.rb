@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_validation :save_address
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,:validatable
 
@@ -51,6 +53,18 @@ class User < ApplicationRecord
   def prefecture_name=(prefecture_name)
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
+
+  def full_address
+    "%s%s%s"%([self.prefecture_code, self.city, self.building])
+  end
+
+  def save_address
+    self.address = full_address
+  end
+
+
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
   
 
   attachment :profile_image, destroy: false
@@ -58,4 +72,6 @@ class User < ApplicationRecord
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }
   validates :introduction, length: { maximum: 50 }
+
+
 end
